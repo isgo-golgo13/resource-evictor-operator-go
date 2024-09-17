@@ -29,3 +29,33 @@ spec:
 ```
 
 For Kubernetes `StatefulSets` without `resources.requests and resources.limits' set.
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: no-resource-statefulset
+spec:
+  serviceName: "no-resource-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: no-resource-app
+  template:
+    metadata:
+      labels:
+        app: no-resource-app
+    spec:
+      containers:
+        - name: app
+          image: <app-image>:latest
+          resources: {}  # Missing resource limits
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+```
