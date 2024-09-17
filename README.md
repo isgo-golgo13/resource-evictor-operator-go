@@ -27,6 +27,12 @@ spec:
         image: <app-image>:latest
         resources: {}  # Missing limits
 ```
+To apply and trigger the resource evictor.
+
+```shell
+kubectl apply -f no-resource-deployment.yaml
+```
+
 
 For Kubernetes `StatefulSets` without `resources.requests and resources.limits' set.
 
@@ -58,4 +64,10 @@ spec:
         resources:
           requests:
             storage: 1Gi
+```
+
+To apply and trigger the resource evictor.
+
+```shell
+kubectl apply -f no-resource-statefulset.yaml
 ```
